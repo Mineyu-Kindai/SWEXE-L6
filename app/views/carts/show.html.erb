@@ -1,0 +1,15 @@
+<h1>カートページ</h1>
+
+<% total_price = 0 %>
+<% @cart.cart_items.each do |ci| %>
+  <% total_price += ci.product.price * ci.qty %>
+  商品名：<%= ci.product.name %><br>
+  価格：<%= ci.product.price %><br>
+  数量：<%= ci.qty %><br>
+  <%= link_to "カートから削除", cart_item_path(ci), data: {turbo_method: :delete} %><br><br>
+<% end %>
+
+<br>
+合計金額：<%= total_price %>円
+<br><br>
+<%= link_to "商品一覧に戻る", products_path %>

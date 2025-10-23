@@ -1,0 +1,24 @@
+<h1>商品を追加する</h1>
+
+<% if @product.errors.present? %>
+<h3>エラーがあります。</h3>
+<ul>
+  <% @product.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+</ul>
+<% end %>
+
+<%= form_with model: @product do |form| %>
+  <p>
+    <%= form.label :name, "商品名" %>
+    <%= form.text_field :name %>
+  </p>
+  <p>
+    <%= form.label :price, "価格" %>
+    <%= form.number_field :price %>
+  </p>
+  <%= form.submit "登録" %>
+<% end %>
+<br>
+<%= link_to "商品一覧に戻る", products_path %>

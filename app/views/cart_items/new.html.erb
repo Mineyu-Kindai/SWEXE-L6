@@ -1,0 +1,21 @@
+<h1>カートにアイテムを追加</h1>
+
+<% if @cart_item.errors.present? %>
+<h3>エラーがあります。</h3>
+<ul>
+  <% @cart_item.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+</ul>
+<% end %>
+
+<%= form_with model: @cart_item, local: true do |form| %>
+  商品名：<%= @product.name %><br>
+  価格：<%= @product.price %><br>
+  <%= form.hidden_field :product_id, value: @product.id %>
+   <%= form.label :qty, "数量：" %>
+   <%= form.number_field :qty %><br>
+  <%= form.submit "カートに追加" %>
+<% end %>
+<br>
+<%= link_to "商品一覧に戻る", products_path %>

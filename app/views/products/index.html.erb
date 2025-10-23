@@ -1,0 +1,17 @@
+<h1>商品一覧</h1>
+
+<% if flash[:notice] %>
+    <%= flash[:notice] %><br><br>
+<% end %>
+
+使用中のカートID：<%= session[:cart_id] %><br><br>
+
+<% @products.each do |pr| %>
+  商品名：<%= pr.name %><br>
+  価格：<%= pr.price %><br>
+  <%= link_to "商品を削除", product_path(pr), data: {turbo_method: :delete} %>
+  <%= link_to "カートに追加", new_cart_item_path(product_id: pr.id) %><br><br>
+<% end %>
+
+<%= link_to "商品を追加する", new_product_path %><br>
+<%= link_to "カートを見る" , current_cart %><br>
